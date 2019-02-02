@@ -110,9 +110,10 @@ GROUP BY f.title;
 # Sub query method:
 SELECT COUNT(i.film_id)
 FROM inventory AS i
-WHERE i.film_id IN (SELECT film_id
-								  FROM film AS f
-								  WHERE f.title='Hunchback Impossible');
+WHERE i.film_id IN (
+	SELECT film_id
+	FROM film AS f
+	WHERE f.title='Hunchback Impossible');
 
 #Table Join Method:
 SELECT f.title, COUNT(i.inventory_id)
@@ -142,18 +143,21 @@ starting with the letters K and Q whose language is English.*/
 SELECT title
 FROM film f
 WHERE title LIKE 'K%' OR title LIKE 'Q%'
-AND language_id IN ( SELECT language_id
-											FROM language
-                                            WHERE name='English');
+AND language_id IN ( 
+	SELECT language_id
+	FROM language
+	WHERE name='English');
 
 #7b. Use subqueries to display all actors who appear in the film Alone Trip.
 SELECT actor_id, first_name, last_name
 FROM actor
-WHERE actor_id IN (SELECT actor_id
-									FROM film_actor
-                                    WHERE film_id IN (SELECT film_id
-																	FROM film
-                                                                    WHERE title ='Alone Trip'));
+WHERE actor_id IN (
+	SELECT actor_id
+	FROM film_actor
+	WHERE film_id IN (
+		SELECT film_id
+		FROM film
+		WHERE title ='Alone Trip'));
                                                                     
 /*7c. You want to run an email marketing campaign in Canada, for which you will need the names and 
 email addresses of all Canadian customers. Use joins to retrieve this information.*/
